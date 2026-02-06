@@ -10,11 +10,26 @@ namespace CalculatorTest
     public class CalculatorTest
     {
 
-        [Fact]
-        public void CalculatorAddMethodTest()
+        [Theory]
+        [InlineData(3, 5, 8)]
+        [InlineData(4, -10, -6)]
+        [InlineData(4, -4, 0)]
+        [InlineData(0, 2, 2)]
+        public void CalculatorAddMethodTest(double num1, double num2, double expected)
         {
-            double result = CalculatorModel.Add(3, 5);
-            Assert.Equal(8, result);
+            double result = CalculatorModel.Add(num1, num2);
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(3, 5, -2)]
+        [InlineData(4, -10, 14)]
+        [InlineData(4, -4, 8)]
+        [InlineData(0, 2, -2)]
+        public void CalculatorSubtractMethodTest(double num1, double num2, double expected)
+        {
+            double result = CalculatorModel.Subtract(num1, num2);
+            Assert.Equal(expected, result);
         }
     }
 }
