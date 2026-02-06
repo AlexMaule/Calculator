@@ -22,5 +22,7 @@ namespace Calculator
         public static double Multiply(double num1, double num2) => num1 * num2;
 
         public static double ChangeSign(double num) => -num;
+
+        public static double Percentage(double num) => num / 100;
     }
 }

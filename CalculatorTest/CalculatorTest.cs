@@ -69,5 +69,15 @@ namespace CalculatorTest
             double result = CalculatorModel.ChangeSign(num1);
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData(8, 0.08)]
+        [InlineData(0, 0)]
+        [InlineData(500, 5)]
+        public void CalculatorPercentageMethodTest(double num, double expected)
+        {
+            double result = CalculatorModel.Percentage(num);
+            Assert.Equal(expected, result);
+        }
     }
 }
