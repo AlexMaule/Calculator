@@ -19,7 +19,7 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new CalculatorViewModel();
+            DataContext = new CalculatorViewModel();
         }
     }
 }
