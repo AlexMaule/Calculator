@@ -56,19 +56,46 @@ namespace Calculator
             EqualCommand = new RelayCommand(ExecuteEqual);
         }
 
-        private void ExecuteEqual(object? obj)
+        
+        // Methods.
+
+        private void ExecuteEqual(object? parameter)
         {
-            throw new NotImplementedException();
+            double currentValue = double.Parse(DisplayText);
+
+            double result = _operation switch
+                                        {
+                                            "+" => CalculatorModel.Add(_lastNumber, currentValue),
+                                            "-" => CalculatorModel.Subtract(_lastNumber, currentValue),
+                                            "*" => CalculatorModel.Multiply(_lastNumber, currentValue),
+                                            "/" => CalculatorModel.Divide(_lastNumber, currentValue),
+                                            _ => currentValue
+                                        };
+
+            DisplayText = result.ToString();
+            _isNewEntry = true;
         }
 
-        private void ExecuteSign(object? obj)
+        private void ExecuteSign(object? parameter)
         {
-            throw new NotImplementedException();
+            if (DisplayText != "0")
+            {
+                double currentValue = double.Parse(DisplayText);
+                DisplayText = CalculatorModel.ChangeSign(currentValue).ToString();
+            }
         }
 
-        private void ExecuteDecimal(object? obj)
+        private void ExecuteDecimal(object? parameter)
         {
-            throw new NotImplementedException();
+            if (_isNewEntry)
+            {
+                DisplayText = "0.";
+                _isNewEntry = false;
+            }
+            else if (!DisplayText.Contains("."))
+            {
+                DisplayText += ".";
+            }
         }
 
         public void ExecuteDigit(object? parameter)
@@ -82,29 +109,38 @@ namespace Calculator
             else DisplayText = _displayText + digit;
         }
 
-        private void ExecuteOperation(object? obj)
+        private void ExecuteOperation(object? parameter)
         {
-            throw new NotImplementedException();
+            _lastNumber = double.Parse(DisplayText);
+            _operation = parameter?.ToString() ?? "Error";
+            _isNewEntry = true;
         }
 
-        private void ExecutePercentage(object? obj)
+        private void ExecutePercentage(object? parameter)
         {
-            throw new NotImplementedException();
+            double currentValue = double.Parse(DisplayText);
+            double result = CalculatorModel.Percentage(currentValue);
+            DisplayText = result.ToString();
         }
 
-        private void ExecuteClearEntry(object? obj)
+        private void ExecuteClearEntry(object? parameter)
         {
-            throw new NotImplementedException();
+            if (_displayText != "0")
+            {
+                DisplayText = "0";
+                _isNewEntry = true;
+            }
         }
 
-        private void ExecuteClear(object? obj)
+        private void ExecuteClear(object? parameter)
         {
-            throw new NotImplementedException();
+            DisplayText = "0";
+            _lastNumber = 0;
+            _operation = "";
+            _isNewEntry = true;
         }
 
-        // Methods.
-
-
+        // Notify the UI to refresh.
         private void OnPropertyChanged([CallerMemberName] string? property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
