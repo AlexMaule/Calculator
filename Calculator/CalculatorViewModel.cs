@@ -56,6 +56,52 @@ namespace Calculator
             EqualCommand = new RelayCommand(ExecuteEqual);
         }
 
+        private void ExecuteEqual(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteSign(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteDecimal(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExecuteDigit(object? parameter)
+        {
+            string digit = parameter?.ToString() ?? "Error";
+            if (_isNewEntry)
+            {
+                DisplayText = digit;
+                _isNewEntry = false;
+            }
+            else DisplayText = _displayText + digit;
+        }
+
+        private void ExecuteOperation(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecutePercentage(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteClearEntry(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteClear(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
         // Methods.
 
 

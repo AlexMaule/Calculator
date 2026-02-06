@@ -83,6 +83,26 @@ namespace CalculatorTest
 
     public class CalculatorViewModelTest
     {
+        [Fact]
+        public void DisplaysZeroOnInitializationTest()
+        {
+            var viewModel = new CalculatorViewModel();
+            Assert.Equal("0", viewModel.DisplayText);
+        }
 
+        [Theory]
+        [InlineData("0")]
+        [InlineData("3")]
+        [InlineData("58")]
+        public void DisplaysDigitOnCommandTest(string numString)
+        {
+            var viewModel = new CalculatorViewModel();
+            foreach (char digit in numString) 
+            { 
+                viewModel.ExecuteDigit(digit);
+            }
+            
+            Assert.Equal(numString, viewModel.DisplayText);
+        }
     }
 }
