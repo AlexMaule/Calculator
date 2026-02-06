@@ -60,5 +60,14 @@ namespace CalculatorTest
             Assert.Equal(expected, result);
         }
 
+        [Theory]
+        [InlineData(8, -8)]
+        [InlineData(0, 0)]
+        [InlineData(-0.5, 0.5)]
+        public void CalculatorChangeSignMethodTest(double num1, double expected)
+        {
+            double result = CalculatorModel.ChangeSign(num1);
+            Assert.Equal(expected, result);
+        }
     }
 }
