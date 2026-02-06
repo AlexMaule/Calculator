@@ -18,5 +18,7 @@ namespace Calculator
 
             else return num1 / num2;
         }
+
+        public static double Multiply(double num1, double num2) => num1 * num2;
     }
 }

@@ -48,5 +48,17 @@ namespace CalculatorTest
         {
             Assert.Throws<DivideByZeroException>(() => CalculatorModel.Divide(5, 0));
         }
+
+        [Theory]
+        [InlineData(10, 5, 50)]
+        [InlineData(4, -10, -40)]
+        [InlineData(4, 1, 4)]
+        [InlineData(0, 2, 0)]
+        public void CalculatorMultiplyMethodTest(double num1, double num2, double expected)
+        {
+            double result = CalculatorModel.Multiply(num1, num2);
+            Assert.Equal(expected, result);
+        }
+
     }
 }
