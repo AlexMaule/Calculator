@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace Calculator
@@ -33,8 +34,27 @@ namespace Calculator
             }
         }
 
-        // Constructor.
+        public ICommand? ClearCommand { get; }
+        public ICommand? ClearEntryCommand { get; }
+        public ICommand? PercentageCommand { get; }
+        public ICommand? OperationCommand { get; }
+        public ICommand? DigitCommand { get; }
+        public ICommand? DecimalCommand { get; }
+        public ICommand? SignCommand { get; }
+        public ICommand? EqualCommand { get; }
 
+        // Constructor.
+        public CalculatorViewModel()
+        {
+            ClearCommand = new RelayCommand(ExecuteClear);
+            ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
+            PercentageCommand = new RelayCommand(ExecutePercentage);
+            OperationCommand = new RelayCommand(ExecuteOperation);
+            DigitCommand = new RelayCommand(ExecuteDigit);
+            DecimalCommand = new RelayCommand(ExecuteDecimal);
+            SignCommand = new RelayCommand(ExecuteSign);
+            EqualCommand = new RelayCommand(ExecuteEqual);
+        }
 
         // Methods.
 
