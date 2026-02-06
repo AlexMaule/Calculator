@@ -31,5 +31,22 @@ namespace CalculatorTest
             double result = CalculatorModel.Subtract(num1, num2);
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData(10, 5, 2)]
+        [InlineData(4, -10, -0.4)]
+        [InlineData(4, -4, -1)]
+        [InlineData(0, 2, 0)]
+        public void CalculatorDivideMethodTest(double num1, double num2, double expected)
+        {
+            double result = CalculatorModel.Divide(num1, num2);
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void CalculatorDivideByZeroExceptionTest()
+        {
+            Assert.Throws<DivideByZeroException>(() => CalculatorModel.Divide(5, 0));
+        }
     }
 }
