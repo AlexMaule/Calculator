@@ -7,7 +7,7 @@ using Calculator;
 
 namespace CalculatorTest
 {
-    public class CalculatorTest
+    public class CalculatorModelTest
     {
 
         [Theory]
@@ -79,5 +79,10 @@ namespace CalculatorTest
             double result = CalculatorModel.Percentage(num);
             Assert.Equal(expected, result);
         }
+    }
+
+    public class CalculatorViewModelTest
+    {
+
     }
 }
