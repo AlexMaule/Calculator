@@ -49,7 +49,7 @@ namespace Calculator
             DigitCommand = new RelayCommand(ExecuteDigit);
             OperationCommand = new RelayCommand(ExecuteOperation);
             EqualCommand = new RelayCommand(ExecuteEqual);
-            //ClearCommand = new RelayCommand(ExecuteClear);
+            ClearCommand = new RelayCommand(ExecuteClear);
             //ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
             //PercentageCommand = new RelayCommand(ExecutePercentage);
             //DecimalCommand = new RelayCommand(ExecuteDecimal);
@@ -90,6 +90,14 @@ namespace Calculator
             };
 
             DisplayText = result.ToString();
+            _isNewEntry = true;
+        }
+
+        private void ExecuteClear(object? parameter)
+        {
+            DisplayText = "0";
+            _operation = "";
+            _lastNumber = 0;
             _isNewEntry = true;
         }
 

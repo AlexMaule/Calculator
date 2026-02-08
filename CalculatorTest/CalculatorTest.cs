@@ -77,10 +77,10 @@ namespace CalculatorTest
         {
             var viewModel = new CalculatorViewModel();
             string numbers = "0123456789";
-            for (int i=0; i< numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 viewModel.DigitCommand?.Execute(numbers[i]);
-                Assert.Equal(numbers.Substring(0, i+1), viewModel.DisplayText);
+                Assert.Equal(numbers.Substring(0, i + 1), viewModel.DisplayText);
             }
         }
 
@@ -93,6 +93,15 @@ namespace CalculatorTest
             viewModel.DigitCommand?.Execute("3");
             viewModel.EqualCommand?.Execute("=");
             Assert.Equal("8", viewModel.DisplayText);
+        }
+
+        [Fact]
+        public void Clears5FromDisplay()
+        {
+            var viewModel = new CalculatorViewModel();
+            viewModel.DigitCommand?.Execute("5");
+            viewModel.ClearCommand?.Execute("C");
+            Assert.Equal("0", viewModel.DisplayText);
         }
     }
 }
