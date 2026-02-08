@@ -61,4 +61,15 @@ namespace CalculatorTest
         }
 
     }
+
+    public class CalculatorViewModelTest
+    {
+        [Fact]
+        public void ClickButton5DisplaysNumberInDisplay()
+        {
+            var viewModel = new CalculatorViewModel();
+            viewModel.ExecuteDigit("5");
+            Assert.Equal("5", viewModel.DisplayText);
+        }
+    }
 }

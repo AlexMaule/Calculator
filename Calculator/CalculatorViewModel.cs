@@ -46,17 +46,29 @@ namespace Calculator
         // Constructor.
         public CalculatorViewModel()
         {
-            ClearCommand = new RelayCommand(ExecuteClear);
-            ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
-            PercentageCommand = new RelayCommand(ExecutePercentage);
-            OperationCommand = new RelayCommand(ExecuteOperation);
             DigitCommand = new RelayCommand(ExecuteDigit);
-            DecimalCommand = new RelayCommand(ExecuteDecimal);
-            SignCommand = new RelayCommand(ExecuteSign);
-            EqualCommand = new RelayCommand(ExecuteEqual);
+            //ClearCommand = new RelayCommand(ExecuteClear);
+            //ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
+            //PercentageCommand = new RelayCommand(ExecutePercentage);
+            //OperationCommand = new RelayCommand(ExecuteOperation);
+            
+            //DecimalCommand = new RelayCommand(ExecuteDecimal);
+            //SignCommand = new RelayCommand(ExecuteSign);
+            //EqualCommand = new RelayCommand(ExecuteEqual);
         }
 
         // Methods.
+        public void ExecuteDigit(object? parameter)
+        {
+            string digit = parameter?.ToString() ?? "0";
+
+            if (_isNewEntry)
+            {
+                DisplayText = digit;
+                _isNewEntry = false;
+            }
+            else DisplayText = _displayText + digit;
+        }
 
 
         private void OnPropertyChanged([CallerMemberName] string? property = null)
