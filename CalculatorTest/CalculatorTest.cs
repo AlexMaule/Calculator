@@ -68,8 +68,31 @@ namespace CalculatorTest
         public void ClickButton5DisplaysNumberInDisplay()
         {
             var viewModel = new CalculatorViewModel();
-            viewModel.ExecuteDigit("5");
+            viewModel.DigitCommand?.Execute("5");
             Assert.Equal("5", viewModel.DisplayText);
+        }
+
+        [Fact]
+        public void ClickNumberButtonDisplaysNumberInDisplay()
+        {
+            var viewModel = new CalculatorViewModel();
+            string numbers = "0123456789";
+            for (int i=0; i< numbers.Length; i++)
+            {
+                viewModel.DigitCommand?.Execute(numbers[i]);
+                Assert.Equal(numbers.Substring(0, i+1), viewModel.DisplayText);
+            }
+        }
+
+        [Fact]
+        public void Calculates5Plus3Equals8()
+        {
+            var viewModel = new CalculatorViewModel();
+            viewModel.DigitCommand?.Execute("5");
+            viewModel.OperationCommand?.Execute("+");
+            viewModel.DigitCommand?.Execute("3");
+            viewModel.EqualCommand?.Execute("=");
+            Assert.Equal("8", viewModel.DisplayText);
         }
     }
 }

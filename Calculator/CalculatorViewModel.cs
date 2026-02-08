@@ -47,18 +47,17 @@ namespace Calculator
         public CalculatorViewModel()
         {
             DigitCommand = new RelayCommand(ExecuteDigit);
+            OperationCommand = new RelayCommand(ExecuteOperation);
+            EqualCommand = new RelayCommand(ExecuteEqual);
             //ClearCommand = new RelayCommand(ExecuteClear);
             //ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
             //PercentageCommand = new RelayCommand(ExecutePercentage);
-            //OperationCommand = new RelayCommand(ExecuteOperation);
-            
             //DecimalCommand = new RelayCommand(ExecuteDecimal);
             //SignCommand = new RelayCommand(ExecuteSign);
-            //EqualCommand = new RelayCommand(ExecuteEqual);
         }
 
         // Methods.
-        public void ExecuteDigit(object? parameter)
+        private void ExecuteDigit(object? parameter)
         {
             string digit = parameter?.ToString() ?? "0";
 
@@ -70,6 +69,29 @@ namespace Calculator
             else DisplayText = _displayText + digit;
         }
 
+        private void ExecuteOperation(object? parameter)
+        {
+            _lastNumber = double.Parse(DisplayText);
+            _operation = parameter?.ToString() ?? "";
+            _isNewEntry = true;
+        }
+
+        private void ExecuteEqual(object? parameter)
+        {
+            double currentValue = double.Parse(DisplayText);
+
+            double result = _operation switch
+            {
+                "+" => CalculatorModel.Add(_lastNumber, currentValue),
+                "-" => CalculatorModel.Subtract(_lastNumber, currentValue),
+                "*" => CalculatorModel.Multiply(_lastNumber, currentValue),
+                "/" => CalculatorModel.Divide(_lastNumber, currentValue),
+                _ => currentValue
+            };
+
+            DisplayText = result.ToString();
+            _isNewEntry = true;
+        }
 
         private void OnPropertyChanged([CallerMemberName] string? property = null)
         {
