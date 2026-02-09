@@ -50,10 +50,7 @@ namespace Calculator
             OperationCommand = new RelayCommand(ExecuteOperation);
             EqualCommand = new RelayCommand(ExecuteEqual);
             ClearCommand = new RelayCommand(ExecuteClear);
-            //ClearEntryCommand = new RelayCommand(ExecuteClearEntry);
-            //PercentageCommand = new RelayCommand(ExecutePercentage);
-            //DecimalCommand = new RelayCommand(ExecuteDecimal);
-            //SignCommand = new RelayCommand(ExecuteSign);
+
         }
 
         // Methods.
@@ -61,6 +58,7 @@ namespace Calculator
         {
             string digit = parameter?.ToString() ?? "0";
 
+            // Update if is a new entry, append otherwise.
             if (_isNewEntry)
             {
                 DisplayText = digit;
@@ -80,6 +78,7 @@ namespace Calculator
         {
             double currentValue = double.Parse(DisplayText);
 
+            // Calculate based on the Operation.
             double result = _operation switch
             {
                 "+" => CalculatorModel.Add(_lastNumber, currentValue),
@@ -95,12 +94,14 @@ namespace Calculator
 
         private void ExecuteClear(object? parameter)
         {
+            // Reset to initial state.
             DisplayText = "0";
             _operation = "";
             _lastNumber = 0;
             _isNewEntry = true;
         }
 
+        // Method to let UI know when one of its items changed.
         private void OnPropertyChanged([CallerMemberName] string? property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
